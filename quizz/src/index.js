@@ -1,12 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Popup from "./Component/Pop-up/Popup";
+import Footer from "./Component/Footer/Footer";
+import Question from "./Component/Question/Question";
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<Popup></Popup>, document.getElementById("root"));
+ReactDOM.render(<Question></Question>, document.getElementById("question"));
+ReactDOM.render(<Footer></Footer>, document.getElementById("footer"));
