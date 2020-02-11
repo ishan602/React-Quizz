@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import QuestionTemplate from "../Question-Template/Question-Template";
 import axios from "axios";
-function Question() {
+function RenderNextQuestion(e) {
+  let current = parseInt(e.target.id, 10);
+  let next = current + 1;
   const [questionState, setQuestion] = useState({
     questions: []
   });
@@ -11,13 +13,13 @@ function Question() {
       .then(res => {
         setQuestion({ questions: res.data });
       })
-      .catch(e => {
-        console.log(e);
+      .catch(error => {
+        console.log(error);
       });
   }, []);
   return (
     <>
-      {questionState.questions.slice(0, 1).map(question => (
+      {questionState.questions.slice(current, next).map(question => (
         <QuestionTemplate
           key={question.id}
           {...question}
@@ -27,13 +29,4 @@ function Question() {
     </>
   );
 }
-export function RenderNextQuestion(e) {
-  var current = parseInt(e.target.id, 10);
-  if (current == null) {
-    current = 0;
-  }
-  let next = current + 1;
-
-  return console.log("Hello");
-}
-export default Question;
+export default RenderNextQuestion;

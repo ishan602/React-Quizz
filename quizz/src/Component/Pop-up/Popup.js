@@ -1,8 +1,10 @@
 import React from "react";
 import "./Pop-up.css";
+import { Start } from "./Pop-up.js";
+
 const Popup = () => {
   return (
-    <div className='popup'>
+    <div className='popup' id='popup'>
       <div className='popup__content'>
         <div className='popup__content__heading'>
           <h1>welcome to the quizz</h1>
@@ -18,8 +20,8 @@ const Popup = () => {
             them into the components.
           </p>
         </div>
-        <div className='popup__content__startButton'>
-          <button>start the quizz</button>
+        <div className='popup__content__startButton' id='startButton'>
+          <button onClick={Start}>start the quizz</button>
         </div>
       </div>
     </div>
