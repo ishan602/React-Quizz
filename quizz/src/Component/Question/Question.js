@@ -33,6 +33,14 @@ function Question() {
     setIndex(index + 1);
   }
   function RenderNextQuestion() {
+    let options = ["option1", "option2", "option3", "option4"];
+    options.map(option => {
+      var element = document.getElementById(option);
+      var cla = element.className;
+      if (cla != "") {
+        element.className = "";
+      }
+    });
     console.log("Render Next Question");
     console.log(index);
     setFilterQuestion({
@@ -46,20 +54,32 @@ function Question() {
     }
   }
   if (index === 1) {
-    setTimeout(RenderFirstQuestion, 1000);
+    setTimeout(RenderFirstQuestion, 1500);
   }
-  function RightAnswer() {
+  function RightAnswer(id) {
     console.log("Right Answer");
+    document.getElementById(id).classList.add("right");
   }
-  function WrongAnswer() {
+  function WrongAnswer(id) {
     console.log("Wrong Answer");
+    document.getElementById(id).classList.add("wrong");
+  }
+  function DisableAnswer() {
+    let options = ["option1", "option2", "option3", "option4"];
+    options.map(option => {
+      var element = document.getElementById(option);
+      var cla = element.className;
+      element.classList.add("disable");
+    });
   }
   function AnswerVerification(ans, clkOption, id) {
     console.log(id);
     if (ans === clkOption) {
-      RightAnswer();
+      RightAnswer(id);
+      DisableAnswer();
     } else {
-      WrongAnswer();
+      WrongAnswer(id);
+      DisableAnswer();
     }
   }
   return (
@@ -75,22 +95,55 @@ function Question() {
                 className=''
                 id='option1'
                 onClick={() =>
-                  AnswerVerification(question.answer, question.options[0])
+                  AnswerVerification(
+                    question.answer,
+                    question.options[0],
+                    "option1"
+                  )
                 }
-                name={question.answer}
               >
                 <span className='option-heading'>a</span>
                 <span className='option-text'>{question.options[0]}</span>
               </li>
-              <li className=''>
+              <li
+                className=''
+                id='option2'
+                onClick={() =>
+                  AnswerVerification(
+                    question.answer,
+                    question.options[1],
+                    "option2"
+                  )
+                }
+              >
                 <span className='option-heading'>b</span>
                 <span className='option-text'>{question.options[1]}</span>
               </li>
-              <li className=''>
+              <li
+                className=''
+                id='option3'
+                onClick={() =>
+                  AnswerVerification(
+                    question.answer,
+                    question.options[2],
+                    "option3"
+                  )
+                }
+              >
                 <span className='option-heading'>c</span>
                 <span className='option-text'>{question.options[2]}</span>
               </li>
-              <li className=''>
+              <li
+                className=''
+                id='option4'
+                onClick={() =>
+                  AnswerVerification(
+                    question.answer,
+                    question.options[3],
+                    "option4"
+                  )
+                }
+              >
                 <span className='option-heading'>d</span>
                 <span className='option-text'>{question.options[3]}</span>
               </li>

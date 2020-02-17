@@ -54,6 +54,18 @@
   text-transform: capitalize;
   display: inline-block;
 }
+.question .question__answer ul li.wrong {
+  opacity: 0.6;
+  pointer-events: none;
+  transition-duration: 0.8s ease-in-out;
+}
+.question .question__answer ul li.right {
+  background-color: green;
+  transition: 0.8s ease-in-out;
+}
+.question .question__answer ul li.disable {
+  pointer-events: none;
+}
 .question .question__submit-button {
   padding: 20px;
   width: 50%;
