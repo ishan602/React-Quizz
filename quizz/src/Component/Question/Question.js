@@ -6,44 +6,79 @@ function Question() {
   const [questionState, setQuestion] = useState({
     questions: []
   });
+  var [filterQuestionState, setFilterQuestion] = useState({
+    filterquestions: []
+  });
   var [index, setIndex] = useState(1);
-  var filterQuestion;
   useEffect(() => {
     axios
       .get("./data.json")
       .then(res => {
+        console.log(res.data);
         setQuestion({ questions: res.data });
       })
       .catch(e => {
         console.log(e);
       });
   }, []);
-  console.log(questionState.questions);
-  filterQuestion = questionState.questions.filter(question => {
-    return question.id === index;
-  });
+
+  function RenderFirstQuestion() {
+    console.log("Render First Question");
+    console.log(index);
+    setFilterQuestion({
+      filterquestions: questionState.questions.filter(filterQuestion => {
+        return filterQuestion.id === index;
+      })
+    });
+    setIndex(index + 1);
+  }
   function RenderNextQuestion() {
-    if (index < questionState.questions.length) {
-      setIndex(index + 1);
-      filterQuestion = questionState.questions.filter(question => {
-        return question.id === index;
-      });
-    } else {
-      console.log("Limit Reached");
+    console.log("Render Next Question");
+    console.log(index);
+    setFilterQuestion({
+      filterquestions: questionState.questions.filter(filterQuestion => {
+        return filterQuestion.id === index;
+      })
+    });
+    setIndex(index + 1);
+    if (index === questionState.questions.length) {
       document.getElementById("next-question").style.display = "none";
     }
   }
-
+  if (index === 1) {
+    setTimeout(RenderFirstQuestion, 1000);
+  }
+  function RightAnswer() {
+    console.log("Right Answer");
+  }
+  function WrongAnswer() {
+    console.log("Wrong Answer");
+  }
+  function AnswerVerification(ans, clkOption, id) {
+    console.log(id);
+    if (ans === clkOption) {
+      RightAnswer();
+    } else {
+      WrongAnswer();
+    }
+  }
   return (
     <>
-      {filterQuestion.map(question => (
+      {filterQuestionState.filterquestions.map(question => (
         <div className='question'>
           <div className='question__heading'>
             <span>{question.question}?</span>
           </div>
           <div className='question__answer'>
             <ul>
-              <li className=''>
+              <li
+                className=''
+                id='option1'
+                onClick={() =>
+                  AnswerVerification(question.answer, question.options[0])
+                }
+                name={question.answer}
+              >
                 <span className='option-heading'>a</span>
                 <span className='option-text'>{question.options[0]}</span>
               </li>
